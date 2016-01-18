@@ -25,6 +25,35 @@ namespace QuickTwitter.Views
         public MainView()
         {
             this.InitializeComponent();
+            ItemListView.SizeChanged += (s, e) => SetItemsWidth();
+            
+        }
+
+        private ItemsWrapGrid _wrapGrid;
+
+        public int Columns
+        {
+            get { return (int)GetValue(ColumnsProperty); }
+            set { SetValue(ColumnsProperty, value); SetItemsWidth(); }
+        }
+
+        // Using a DependencyProperty as the backing store for Columns. This enables animation, styling, binding, etc... 
+        public static readonly DependencyProperty ColumnsProperty =
+        DependencyProperty.Register("Columns", typeof(int), typeof(MainView), new PropertyMetadata(1));
+
+        private void SetItemsWidth()
+        {
+            if (_wrapGrid == null)
+            {
+                return;
+            }
+            _wrapGrid.ItemWidth = (int)ItemListView.ActualWidth / Columns;
+        }
+
+        private void VariableSizedWrapGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            _wrapGrid = sender as ItemsWrapGrid;
+            SetItemsWidth();
         }
     }
 }

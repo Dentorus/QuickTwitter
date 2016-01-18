@@ -13,7 +13,6 @@
         <SplitView x:Name="RootSplitView" DisplayMode="CompactInline" IsPaneOpen="False" CompactPaneLength="50" OpenPaneLength="200">
             <SplitView.Pane >
                 <StackPanel Background="Gray" Margin="0,50,0,0" >
-
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
                          Width="50" Height="50" Background="Transparent"/>

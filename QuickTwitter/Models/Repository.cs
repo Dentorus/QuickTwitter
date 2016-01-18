@@ -21,7 +21,6 @@ namespace QuickTwitter.Models
         public Repository()
         {
             _connection = new SQLiteAsyncConnection(databasePath);
-            Initialize();
         }
 
         public async Task CreateTables()
@@ -38,7 +37,7 @@ namespace QuickTwitter.Models
             await CreateTables();
             //userInfo object is Null
             //TODO: Initialize Repo before sending request
-                Initialize();
+            await Initialize();
             var userInfo = await _connection.Table<UserInfo>().FirstOrDefaultAsync();
 
             return userInfo;
@@ -51,7 +50,7 @@ namespace QuickTwitter.Models
             await _connection.InsertAsync(item);
         }
 
-        public async void Initialize()
+        public async Task Initialize()
         {
             try
             {

@@ -13,65 +13,54 @@
         <CollectionViewSource x:Key="cvs" Source="{Binding Tweets}" />
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" VerticalAlignment="Top"  ManipulationMode="TranslateX">
-        <md:VariableSizeGridView x:Name="ItemGridView" 
-                  ItemsSource="{Binding Source={StaticResource cvs}}" 
-                  Padding="15" 
-                  IsItemClickEnabled="True" 
-                  HorizontalAlignment="Stretch"
-                  HorizontalContentAlignment="Left" >
-            <GridView.ItemsPanel >
-                <ItemsPanelTemplate >
-                    <VariableSizedWrapGrid Orientation="Vertical" ItemWidth="200" ItemHeight="50" MaximumRowsOrColumns="20"/>
-                    </ItemsPanelTemplate >
-                    </GridView.ItemsPanel >
-                    <GridView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="540"/>
-                        </Grid.ColumnDefinitions>
+    <md:VariableSizeGridView x:Name="ItemListView" ItemsSource="{Binding Source={StaticResource cvs}}" Padding="15" IsItemClickEnabled="True">
 
-                                <Image Grid.Column="0"
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <Grid Name="myGrid" Width="{Binding ElementName=ItemGridView, Path=ActualWidth}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width= "*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0"
                                        Grid.Row="0"
                                        Width="50" 
                                        Height="50" 
                                        HorizontalAlignment="Left" 
                                        Source="{Binding User.ProfileImageUrl}"/>
 
-                            <TextBlock Grid.Column="1"
+                    <TextBlock Grid.Column="1"
                                        Grid.Row="0"     
                                        HorizontalAlignment="Left"
-                                       TextWrapping="WrapWholeWords"
+                                       TextWrapping="Wrap"
                                        Text="{Binding Text}"
                                        FontSize="17"/>
 
-                            <TextBlock Grid.Row="2"
-                                       Grid.Column="1"
-                                       HorizontalAlignment="Right"
-                                       Text="{Binding ExpandedCreatedAt}"
-                                       FontSize="12"
-                                       FontStyle="Italic"
-                                       FontStretch="UltraCondensed"/>
+                    <TextBlock 
+                                   Grid.Column="1"
+                                   Grid.Row="2"
+                                   HorizontalAlignment="Right"
+                                   Text="{Binding ExpandedCreatedAt}"
+                                   FontSize="12"
+                                   FontStyle="Italic"
+                                   FontStretch="UltraCondensed"/>
 
-                        <GridView Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" ItemsSource="{Binding ExtendedEntities.Media}">
-                            <GridView.ItemTemplate>
-                                <DataTemplate>
-                                    <Image IsTapEnabled="False" Width="225" Height="Auto" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Source="{Binding MediaUrl}"></Image>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                        </GridView>
-
-                    </Grid>
-
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </md:VariableSizeGridView>
-    </Grid>
+                    <GridView Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" ItemsSource="{Binding ExtendedEntities.Media}">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image IsTapEnabled="False" Width="225" Height="Auto" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Source="{Binding MediaUrl}"></Image>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </md:VariableSizeGridView>
 </Page>

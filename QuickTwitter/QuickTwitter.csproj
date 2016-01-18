@@ -114,7 +114,6 @@
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\Requests\ObtainBearerTokenRequest.cs" />
     <Compile Include="Models\Requests\UserTweetsGet.cs" />
-    <Compile Include="Models\VariableSizeGridView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLite\SQLite.cs" />
     <Compile Include="SQLite\SQLiteAsync.cs" />
